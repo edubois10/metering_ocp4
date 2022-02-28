@@ -1,0 +1,54 @@
+kind: CronJob
+apiVersion: batch/v1beta1
+metadata:
+  name: openshift-metering-processing
+  namespace: koku-metrics-operator
+  labels:
+    app: openshift-metering-processing
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    metadata:
+      labels:
+        app: openshift-metering-processing
+    spec:
+      backoffLimit: 0
+      template:
+        metadata:
+          labels:
+            app: openshift-metering-processing
+        spec:
+          containers:
+            - name: openshift-metering-processing
+              volumeMounts:
+                - name: koku-metrics-operator-reports
+                  mountPath: /tmp/koku-metrics-operator-reports
+                - name: python-scripts
+                  mountPath: /tmp/koku-metrics-operator-reports/pythonScripts
+                - name: csv-files
+                  mountPath: /tmp/koku-metrics-operator-reports/csv-files
+              image: "registry.redhat.io/ubi8/python-36"
+              command:
+                - "/bin/bash"
+                - "-c"
+                - pip install pandas && mkdir -p /tmp/koku-metrics-operator-reports/creditSuisse-billing-reports && tar -xvf /tmp/koku-metrics-operator-reports/upload/20210901T090151-cost-mgmt.tar.gz --directory /tmp/koku-metrics-operator-reports/csv-files/ && python3 /tmp/koku-metrics-operator-reports/pythonScripts/meteringPythonScript.py
+          volumes:
+          - name: koku-metrics-operator-reports
+            persistentVolumeClaim:
+              claimName: koku-metrics-operator-data
+          - name: python-scripts
+            configMap:
+              name: metering-python-script
+          - name: csv-files
+            emptyDir: {}
+          restartPolicy: "Never"
+          terminationGracePeriodSeconds: 30
+          activeDeadlineSeconds: 600
+## $(find /tmp/koku-metrics-operator-reports/reports/ -type f -cmin -"360" | head -n 1)
+
+##find . -type f -mtime -1
+
+# $(find /tmp/koku-metrics-operator-reports/upload -type f -mtime -1)  TO TEST IN THE CONTAINER

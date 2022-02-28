@@ -1,0 +1,91 @@
+{
+ "uuid": "10494ca8-71d3-46af-a9c8-9d6cc72766f7",
+ "cluster_id": "bb7fca7d-17c0-4f5c-8261-fae5660f28b3",
+ "version": "f73a992e7b2fc19028b31c7fb87963ae19bba251",
+ "date": "2021-09-03T09:04:16.256628378Z",
+ "files": [
+  "10494ca8-71d3-46af-a9c8-9d6cc72766f7_openshift_usage_report.0.csv",
+  "10494ca8-71d3-46af-a9c8-9d6cc72766f7_openshift_usage_report.1.csv",
+  "10494ca8-71d3-46af-a9c8-9d6cc72766f7_openshift_usage_report.2.csv",
+  "10494ca8-71d3-46af-a9c8-9d6cc72766f7_openshift_usage_report.3.csv"
+ ],
+ "start": "2021-09-01T09:00:00Z",
+ "end": "2021-09-03T08:59:59Z",
+ "cr_status": {
+  "clusterID": "bb7fca7d-17c0-4f5c-8261-fae5660f28b3",
+  "clusterVersion": "stable-4.7",
+  "api_url": "https://cloud.redhat.com",
+  "authentication": {
+   "type": "token"
+  },
+  "packaging": {
+   "last_successful_packaging_time": "2021-09-01T09:01:52Z",
+   "max_reports_to_store": 30,
+   "max_size_MB": 100,
+   "packaged_files": [
+    "/tmp/koku-metrics-operator-reports/upload/20210830T085843-cost-mgmt.tar.gz",
+    "/tmp/koku-metrics-operator-reports/upload/20210901T090151-cost-mgmt.tar.gz",
+    "/tmp/koku-metrics-operator-reports/upload/c2aa8cca-51a1-4c64-845b-5bab16d456a2_openshift_usage_report.0.csv",
+    "/tmp/koku-metrics-operator-reports/upload/c2aa8cca-51a1-4c64-845b-5bab16d456a2_openshift_usage_report.1.csv",
+    "/tmp/koku-metrics-operator-reports/upload/c2aa8cca-51a1-4c64-845b-5bab16d456a2_openshift_usage_report.2.csv",
+    "/tmp/koku-metrics-operator-reports/upload/c2aa8cca-51a1-4c64-845b-5bab16d456a2_openshift_usage_report.3.csv",
+    "/tmp/koku-metrics-operator-reports/upload/manifest.json"
+   ],
+   "number_reports_stored": 2
+  },
+  "upload": {
+   "ingress_path": "/api/ingress/v1/upload",
+   "upload": false,
+   "upload_wait": 3,
+   "upload_cycle": 2880,
+   "last_successful_upload_time": null,
+   "validate_cert": true
+  },
+  "operator_commit": "f73a992e7b2fc19028b31c7fb87963ae19bba251",
+  "prometheus": {
+   "prometheus_configured": true,
+   "prometheus_connected": true,
+   "last_query_start_time": "2021-09-03T09:04:10Z",
+   "last_query_success_time": "2021-09-03T09:04:10Z",
+   "service_address": "https://thanos-querier.openshift-monitoring.svc:9091",
+   "skip_tls_verification": false
+  },
+  "reports": {
+   "report_month": "09",
+   "last_hour_queried": "2021-09-03 08:00:00 - 2021-09-03 08:59:59",
+   "data_collected": true
+  },
+  "source": {
+   "sources_path": "/api/sources/v1.0/",
+   "name": "INSERT-SOURCE-NAME",
+   "create_source": false,
+   "last_check_time": null,
+   "check_cycle": 1440
+  },
+  "storage": {
+   "volume_type": "\u0026PersistentVolumeClaimVolumeSource{ClaimName:koku-metrics-operator-data,ReadOnly:false,}",
+   "volume_mounted": true
+  },
+  "persistent_volume_claim": {
+   "kind": "PersistentVolumeClaim",
+   "apiVersion": "v1",
+   "metadata": {
+    "name": "koku-metrics-operator-data"
+   },
+   "spec": {
+    "accessModes": [
+     "ReadWriteOnce"
+    ],
+    "resources": {
+     "requests": {
+      "storage": "10Gi"
+     }
+    },
+    "volumeName": "pvc-2d8631ad-a6c2-47b3-ab5d-e85d35507f6c",
+    "storageClassName": "managed-nfs-storage",
+    "volumeMode": "Filesystem"
+   }
+  }
+ },
+ "certified": false
+}
